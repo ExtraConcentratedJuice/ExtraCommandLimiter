@@ -26,6 +26,8 @@ namespace ExtraConcentratedJuice.ExtraCommandLimiter
             Logger.Log("Command execution method successfully patched, disabled commands:");
             Logger.Log($"Safezone:\n{String.Join("\n", Configuration.Instance.safezoneBlockedCommands.Select(x => $"\t{x}").ToArray())}");
             Logger.Log($"Deadzone:\n{String.Join("\n", Configuration.Instance.deadzoneBlockedCommands.Select(x => $"\t{x}").ToArray())}");
+            Logger.Log($"Outside Safezone:\n{String.Join("\n", Configuration.Instance.safezoneOnlyCommands.Select(x => $"\t{x}").ToArray())}");
+            Logger.Log($"Outside Deadzone:\n{String.Join("\n", Configuration.Instance.deadzoneOnlyCommands.Select(x => $"\t{x}").ToArray())}");
         }
 
         protected override void Unload()
@@ -36,7 +38,9 @@ namespace ExtraConcentratedJuice.ExtraCommandLimiter
         public override TranslationList DefaultTranslations => new TranslationList
         {
             { "deadzone", "You are not allowed to call this command from within a deadzone." },
-            { "safezone", "You are not allowed to call this command from within a safezone." }
+            { "safezone", "You are not allowed to call this command from within a safezone." },
+            { "not_safezone", "You are not allowed to call this command from outside of a safezone." },
+            { "not_deadzone", "You are not allowed to call this command from outside of a deadzone." }
         };
     }
 }

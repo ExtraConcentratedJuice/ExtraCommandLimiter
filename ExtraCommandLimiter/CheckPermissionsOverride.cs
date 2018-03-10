@@ -37,6 +37,18 @@ namespace ExtraConcentratedJuice.ExtraCommandLimiter
                 return false;
             }
 
+            if (!inSz && config.safezoneOnlyCommands.Any(x => String.Equals(cmd, x, StringComparison.OrdinalIgnoreCase)))
+            {
+                UnturnedChat.Say(player, ExtraCommandLimiter.instance.Translations.Instance.Translate("not_safezone"));
+                return false;
+            }
+
+            if (!inDz && config.deadzoneOnlyCommands.Any(x => String.Equals(cmd, x, StringComparison.OrdinalIgnoreCase)))
+            {
+                UnturnedChat.Say(player, ExtraCommandLimiter.instance.Translations.Instance.Translate("not_deadzone"));
+                return false;
+            }
+
             return true;
         }
 
